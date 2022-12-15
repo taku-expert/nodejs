@@ -83,8 +83,10 @@ async function getToken() {
       nonce: nonce,
       bot_prompt: bot_prompt
     }};
+   let url2 = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}&scope=${scope}&nonce=${nonce}`;
+
     
-  let response = await axios.get(url, param, header).catch(
+  let response = await axios.get(url2).catch(
     async err => {
       console.log(err);
     });
