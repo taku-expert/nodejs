@@ -1,9 +1,19 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
+const axios = require('axios');
 const indexPage = fs.readFileSync('./index.html', 'UTF-8');
 const styleCss = fs.readFileSync('./style.css', 'UTF-8');
 const scriptJs = fs.readFileSync('./script.js', 'UTF-8');
+
+const callback_url = 'https://lineapi-test.herokuapp.com/';
+const response_type = 'code';
+const client_id = '1657742644';
+const redirect_uri = encodeURI(callback_url);
+const state = 'anafaefn23';
+const scope = 'profile%20openid%20email';
+const nonce = '09876xyz';
+const bot_prompt = 'aggressive';
 
 
 const HOST_NAME = '0.0.0.0';
@@ -11,7 +21,7 @@ const PORT = 3000;
 
 const server = http.createServer(RouteSetting);
 
-function RouteSetting(req, res) {
+async function RouteSetting(req, res) {
   const url_parts = url.parse(req.url);
   console.log(`${url_parts} -- ${url_parts.pathname}`);
   switch (url_parts.pathname) {
@@ -34,6 +44,11 @@ function RouteSetting(req, res) {
       res.end();
       break;
 
+    case '/auth':
+      console.log('sss');
+      await getToken();
+      break;
+
     case '/favicon.ico':
       break;
 
@@ -47,3 +62,33 @@ function RouteSetting(req, res) {
 server.listen(process.env.PORT || PORT, HOST_NAME, () => {
   console.log(`Server running at http://${HOST_NAME}:${PORT}/`);
 });
+
+
+async function getToken() {
+
+  let url = 'https://access.line.me/oauth2/v2.1/';
+  
+  let header = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+  }};
+  
+  let param = {
+    authorize: {
+      response_type: response_type,
+      client_id: client_id,
+      redirect_uri: redirect_uri,
+      state: state,
+      scope: scope,
+      nonce: nonce,
+      bot_prompt: bot_prompt
+    }};
+    
+  let response = await axios.get(url, param, header).catch(
+    async err => {
+      console.log(err);
+    });
+      
+  console.log(response);
+  return response;
+}
