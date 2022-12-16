@@ -1,3 +1,6 @@
+
+'use strict';
+
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
@@ -6,6 +9,7 @@ const indexPage = fs.readFileSync('./index.html', 'UTF-8');
 const styleCss = fs.readFileSync('./style.css', 'UTF-8');
 const scriptJs = fs.readFileSync('./script.js', 'UTF-8');
 
+let url2 = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657742644&redirect_uri=https%3A%2F%2Flineapi-test.herokuapp.com%2F&state=anafaefn23&scope=profile%20openid%20email&nonce=09876xyz`;
 const callback_url = 'https://lineapi-test.herokuapp.com/';
 const response_type = 'code';
 const client_id = '1657742644';
@@ -46,7 +50,11 @@ async function RouteSetting(req, res) {
 
     case '/auth':
       console.log('sss');
-      await getToken();
+      res.writeHead(302, {
+        'Location': 'https://www.google.co.jp/'
+      });
+      res.end();
+      // await getToken();
       break;
 
     case '/favicon.ico':
@@ -62,7 +70,6 @@ async function RouteSetting(req, res) {
 server.listen(process.env.PORT || PORT, HOST_NAME, () => {
   console.log(`Server running at http://${HOST_NAME}:${PORT}/`);
 });
-
 
 async function getToken() {
 
