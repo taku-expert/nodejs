@@ -12,7 +12,6 @@ function btn1() {
   let api = 'https://access.line.me/oauth2/v2.1/authorize';
   let response_type = 'code';
   let client_id = '1657742644';
-  // let redirect_uri = 'https%3A%2F%2Flineapi-test.herokuapp.com%2F';
   let redirect_uri = encodeURI(`${heroku_url}redirect`);
   let state = 'anafaefn23';
   let scope = 'profile%20openid%20email';
@@ -27,17 +26,18 @@ function btn1() {
 function btn2() {
 
   console.log('認証');
+
+  let location_url = new URL(window.location.href);
+  let params = location_url.searchParams;
+  let code = params.get('code');
+  let state = params.get('state');
+  let error = params.get('error');
+  let error_description = params.get('error_description');
+
+  console.log(`code:${code} - state:${state}`);
+  console.log(`errpr:${error} - error_description:${error_description}`);
+
   
-  let url = 'https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657742644&redirect_uri=https%3A%2F%2Flineapi-test.herokuapp.com%2F&state=anafaefn23&scope=profile%20openid%20email&nonce=09876xyz';
-  // document.location.href = url;
-  /*
-  axios.post(`${heroku_url}auth`)
-    .then(response => {
-      console.log(JSON.stringify(response));
-    })
-    .catch(error => {
-      console.error(error);
-    })
-  */
 
 }
+
