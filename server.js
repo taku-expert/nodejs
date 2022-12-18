@@ -49,9 +49,8 @@ async function RouteSetting(req, res) {
       break;
 
     case '/auth':
-      console.log('sss');
       res.writeHead(302, {
-        'Location': 'https://www.google.co.jp/'
+        'Location': url2
       });
       res.end();
       // await getToken();
