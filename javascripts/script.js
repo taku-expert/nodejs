@@ -38,6 +38,8 @@ async function btn2() {
   console.log(`errpr:${error} - error_description:${error_description}`);
 
   let data = await getAccessToken(code);
+  console.log('---');
+  console.log(data);
   let access_token = data.access_token;
   let id_token = data.id_token;
 
