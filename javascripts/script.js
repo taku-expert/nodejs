@@ -48,13 +48,11 @@ async function btn2() {
     }};
   
   let param = {
-    'Content-Type': 'application/x-www-form-urlencoded',
     'code': code,
     'redirect_uri': redirect_uri,
     'client_id': client_id,
     'client_secret': client_secret
   };
-
   let response = await axios.post(url, param, header).catch(
     async err => {
       console.log(err);
