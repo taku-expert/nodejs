@@ -12,8 +12,8 @@ function btn1() {
   let api = 'https://access.line.me/oauth2/v2.1/authorize';
   let response_type = 'code';
   let client_id = '1657742644';
-  let redirect_uri = 'https%3A%2F%2Flineapi-test.herokuapp.com%2F';
-  // let redirect_uri = encodeURI(heroku_url);
+  // let redirect_uri = 'https%3A%2F%2Flineapi-test.herokuapp.com%2F';
+  let redirect_uri = encodeURI(`${heroku_url}redirect`);
   let state = 'anafaefn23';
   let scope = 'profile%20openid%20email';
   let nonce = '09876xyz';
