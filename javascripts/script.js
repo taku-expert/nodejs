@@ -27,8 +27,6 @@ function btn1() {
 
 async function btn2() {
 
-  console.log('認証');
-
   let location_url = new URL(window.location.href);
   let params = location_url.searchParams;
   let code = params.get('code');
@@ -39,6 +37,16 @@ async function btn2() {
   console.log(`code:${code} - state:${state}`);
   console.log(`errpr:${error} - error_description:${error_description}`);
 
+  let data = await getAccessToken(code);
+  let access_token = data.access_token;
+  let id_token = data.id_token;
+
+  let user_info = await getUserInfo(id_token);
+  return false;
+}
+
+
+async function getAccessToken(code) {
 
   let url = 'https://api.line.me/oauth2/v2.1/token';
     
@@ -59,7 +67,26 @@ async function btn2() {
       console.log(err);
     });
   
-  console.log(response);
-  return false;
+  console.log(response.data);
 }
 
+async function getUserInfo(id_token) {
+
+  let url = 'https://api.line.me/oauth2/v2.1/verify';
+    
+  let header = {
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }};
+  
+  let param = {
+    id_token: id_token,
+    client_id: client_id
+  };
+  let response = await axios.post(url, param).catch(
+    async err => {
+      console.log(err);
+    });
+  
+  console.log(response);
+}
