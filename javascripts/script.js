@@ -38,12 +38,12 @@ async function btn2() {
   console.log(`errpr:${error} - error_description:${error_description}`);
 
   let data = await getAccessToken(code);
-  console.log('---');
   console.log(data);
   let access_token = data.access_token;
   let id_token = data.id_token;
 
   let user_info = await getUserInfo(id_token);
+  console.log(user_info);
   return false;
 }
 
@@ -69,7 +69,7 @@ async function getAccessToken(code) {
       console.log(err);
     });
   
-  console.log(response.data);
+  return response.data;
 }
 
 async function getUserInfo(id_token) {
@@ -90,5 +90,5 @@ async function getUserInfo(id_token) {
       console.log(err);
     });
   
-  console.log(response);
+  return response;
 }
