@@ -85,7 +85,7 @@ async function getUserInfo(id_token) {
     id_token: id_token,
     client_id: client_id
   };
-  let response = await axios.post(url, param).catch(
+  let response = await axios.post(url, param, header).catch(
     async err => {
       console.log(err);
     });
