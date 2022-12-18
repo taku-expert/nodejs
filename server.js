@@ -36,7 +36,7 @@ async function RouteSetting(req, res) {
       res.end();
       break;
 
-    case '/a':
+    case '/redirect':
     case '/html/redirect.html':
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.write(redirectPage);
