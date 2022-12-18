@@ -7,7 +7,7 @@ target.onclick = async () => {
   console.log(count);
   count++
   
-  axios.get(`${heroku_url}auth`)
+  axios.post(`${heroku_url}auth`)
     .then(response => {
       console.log(JSON.stringify(response));
     })
