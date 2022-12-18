@@ -48,6 +48,7 @@ async function btn2() {
     }};
   
   let param = {
+    grant_type: 'authorization_code',
     code: code,
     redirect_uri: redirect_uri,
     client_id: client_id,
