@@ -1,13 +1,13 @@
 
-'use strict';
-
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
 const axios = require('axios');
-const indexPage = fs.readFileSync('./index.html', 'UTF-8');
-const styleCss = fs.readFileSync('./style.css', 'UTF-8');
-const scriptJs = fs.readFileSync('./script.js', 'UTF-8');
+const indexPage = fs.readFileSync('./html/index.html', 'UTF-8');
+const redirectPage = fs.readFileSync('./html/redirect.html', 'UTF-8');
+const styleCss = fs.readFileSync('./css/style.css', 'UTF-8');
+const scriptJs = fs.readFileSync('./javascripts/script.js', 'UTF-8');
+const faviconImg = fs.readFileSync('./images/favicon.png', 'UTF-8');
 
 let url2 = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657742644&redirect_uri=https%3A%2F%2Flineapi-test.herokuapp.com%2F&state=anafaefn23&scope=profile%20openid%20email&nonce=09876xyz`;
 const callback_url = 'https://lineapi-test.herokuapp.com/';
@@ -19,44 +19,46 @@ const scope = 'profile%20openid%20email';
 const nonce = '09876xyz';
 const bot_prompt = 'aggressive';
 
-
 const HOST_NAME = '0.0.0.0';
 const PORT = 3000;
 
 const server = http.createServer(RouteSetting);
+
 
 async function RouteSetting(req, res) {
   const url_parts = url.parse(req.url);
   console.log(`${url_parts} -- ${url_parts.pathname}`);
   switch (url_parts.pathname) {
     case '/':
-    case '/index.html':
+    case '/html/index.html':
       res.writeHead(200, {'Content-Type': 'text/html'});
       res.write(indexPage);
       res.end();
       break;
-  
-    case '/style.css':
+
+    case '/a':
+    case '/html/redirect.html':
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(redirectPage);
+      res.end();
+      break;
+
+    case '/css/style.css':
       res.writeHead(200, {'Content-Type': 'text/css'});
       res.write(styleCss);
       res.end();
       break;
 
-    case '/script.js':
+    case '/javascripts/script.js':
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.write(scriptJs);
       res.end();
       break;
 
-    case '/auth':
-      res.writeHead(302, {
-        'Location': url2
-      });
+    case '/images/favicon.png':
+      res.writeHead(200, {'Content-Type': 'image/png'});
+      res.write(faviconImg);
       res.end();
-      // await getToken();
-      break;
-
-    case '/favicon.ico':
       break;
 
     default:
