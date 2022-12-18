@@ -71,34 +71,3 @@ async function RouteSetting(req, res) {
 server.listen(process.env.PORT || PORT, HOST_NAME, () => {
   console.log(`Server running at http://${HOST_NAME}:${PORT}/`);
 });
-
-async function getToken() {
-
-  let url = 'https://access.line.me/oauth2/v2.1/';
-  
-  let header = {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-  }};
-  
-  let param = {
-    authorize: {
-      response_type: response_type,
-      client_id: client_id,
-      redirect_uri: redirect_uri,
-      state: state,
-      scope: scope,
-      nonce: nonce,
-      bot_prompt: bot_prompt
-    }};
-   let url2 = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}&scope=${scope}&nonce=${nonce}`;
-
-    
-  let response = await axios.get(url2).catch(
-    async err => {
-      console.log(err);
-    });
-      
-  console.log(response);
-  return response;
-}
