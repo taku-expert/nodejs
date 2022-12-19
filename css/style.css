@@ -16,3 +16,8 @@ button {
   height: 100px;
   margin: auto 0;
 }
+
+p {
+  font-size: 1.4rem;
+  color: rgb(72, 122, 216);
+}

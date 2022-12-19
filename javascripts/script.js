@@ -50,7 +50,7 @@ async function btn2() {
 
   var output_obj = document.getElementById('output');
   var new_element = document.createElement('p');
-  new_element.textContent = `Hi ${name}! Your email is ${email}.`;
+  new_element.textContent = `${name} - ${email}.`;
   output_obj.appendChild(new_element);
   return false;
 }
