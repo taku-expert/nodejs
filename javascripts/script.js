@@ -65,6 +65,15 @@ async function btn2() {
   // output_obj.appendChild(new_element);
 }
 
+/**
+ * LINEログイン画面表示
+ */
+ function btn3() {
+
+  let url = new URL(window.location.href);
+  document.location.href = `${url}throw`;
+}
+
 
 /*
  * CALL API

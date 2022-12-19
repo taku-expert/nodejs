@@ -11,6 +11,11 @@ body {
   justify-content: center;
 }
 
+body button:nth-child(n+2) {
+
+  margin-left: 50px;
+}
+
 button {
   width: 100px;
   height: 100px;

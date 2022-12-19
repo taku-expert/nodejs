@@ -5,8 +5,10 @@ const url = require('url');
 const axios = require('axios');
 const indexPage = fs.readFileSync('./html/index.html', 'UTF-8');
 const redirectPage = fs.readFileSync('./html/redirect.html', 'UTF-8');
+const throwPage = fs.readFileSync('./html/throw.html', 'UTF-8');
 const styleCss = fs.readFileSync('./css/style.css', 'UTF-8');
 const scriptJs = fs.readFileSync('./javascripts/script.js', 'UTF-8');
+const throwJs = fs.readFileSync('./javascripts/throw.js', 'UTF-8');
 const redirectJs = fs.readFileSync('./javascripts/redirect.js', 'UTF-8');
 const faviconImg = fs.readFileSync('./images/favicon.png', 'UTF-8');
 
@@ -33,6 +35,13 @@ async function RouteSetting(req, res) {
       res.end();
       break;
 
+    case '/throw':
+    case '/html/throw.html':
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.write(throwPage);
+      res.end();
+      break;
+
     case '/css/style.css':
       res.writeHead(200, {'Content-Type': 'text/css'});
       res.write(styleCss);
@@ -48,6 +57,12 @@ async function RouteSetting(req, res) {
     case '/javascripts/redirect.js':
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.write(redirectJs);
+      res.end();
+      break;
+
+    case '/javascripts/throw.js':
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write(throwJs);
       res.end();
       break;
 
