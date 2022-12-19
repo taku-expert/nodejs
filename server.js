@@ -7,6 +7,7 @@ const indexPage = fs.readFileSync('./html/index.html', 'UTF-8');
 const redirectPage = fs.readFileSync('./html/redirect.html', 'UTF-8');
 const styleCss = fs.readFileSync('./css/style.css', 'UTF-8');
 const scriptJs = fs.readFileSync('./javascripts/script.js', 'UTF-8');
+const redirectJs = fs.readFileSync('./javascripts/redirect.js', 'UTF-8');
 const faviconImg = fs.readFileSync('./images/favicon.png', 'UTF-8');
 
 const HOST_NAME = '0.0.0.0';
@@ -41,6 +42,12 @@ async function RouteSetting(req, res) {
     case '/javascripts/script.js':
       res.writeHead(200, {'Content-Type': 'text/plain'});
       res.write(scriptJs);
+      res.end();
+      break;
+
+    case '/javascripts/redirect.js':
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write(redirectJs);
       res.end();
       break;
 

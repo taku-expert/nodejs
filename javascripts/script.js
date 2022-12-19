@@ -1,4 +1,8 @@
 
+/*
+ * HOUSE
+ ********************************/
+
 const heroku_url = 'https://lineapi-test.herokuapp.com/';
 let target1 = document.getElementById('btn1');
 let target2 = document.getElementById('btn2');
@@ -9,10 +13,15 @@ const state = 'anafaefn23';
 const redirect_uri = encodeURI(`${heroku_url}redirect`);
 const client_secret = 'a618a6fd547d524c4f399c4277e004de';
 
+
+/*
+ * SCRIPT
+ ********************************/
+
+/**
+ * LINEログイン画面表示
+ */
 function btn1() {
-  
-  console.log(count);
-  count++
 
   let api = 'https://access.line.me/oauth2/v2.1/authorize';
   let response_type = 'code';
@@ -23,8 +32,9 @@ function btn1() {
   document.location.href = url;
 }
 
-
-
+/**
+ * アクセストークン取得後、ユーザー情報取得
+ */
 async function btn2() {
 
   let location_url = new URL(window.location.href);
@@ -47,15 +57,22 @@ async function btn2() {
 
   let name = user_info.name;
   let email = user_info.email;
+  console.log(`name : ${name} - email : ${email}`)
 
-  var output_obj = document.getElementById('output');
-  var new_element = document.createElement('p');
-  new_element.textContent = `${name} - ${email}.`;
-  output_obj.appendChild(new_element);
-  return false;
+  // var output_obj = document.getElementById('output');
+  // var new_element = document.createElement('p');
+  // new_element.textContent = `${name} - ${email}.`;
+  // output_obj.appendChild(new_element);
 }
 
 
+/*
+ * CALL API
+ ********************************/
+
+/**
+ * アクセストークン取得
+ */
 async function getAccessToken(code) {
 
   let url = 'https://api.line.me/oauth2/v2.1/token';
@@ -81,6 +98,9 @@ async function getAccessToken(code) {
 }
 
 
+/**
+ * ユーザー情報取得
+ */
 async function getUserInfo(id_token) {
 
   let url = 'https://api.line.me/oauth2/v2.1/verify';
