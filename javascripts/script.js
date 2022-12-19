@@ -44,6 +44,14 @@ async function btn2() {
 
   let user_info = await getUserInfo(id_token);
   console.log(user_info);
+
+  let name = user_info.name;
+  let email = user_info.email;
+
+  var output_obj = document.getElementById('output');
+  var new_element = document.createElement('p');
+  new_element.textContent = `Hi ${name}! Your email is ${email}.`;
+  output_obj.appendChild(new_element);
   return false;
 }
 
@@ -72,6 +80,7 @@ async function getAccessToken(code) {
   return response.data;
 }
 
+
 async function getUserInfo(id_token) {
 
   let url = 'https://api.line.me/oauth2/v2.1/verify';
@@ -90,5 +99,5 @@ async function getUserInfo(id_token) {
       console.log(err);
     });
   
-  return response;
+  return response.data;
 }

@@ -9,21 +9,10 @@ const styleCss = fs.readFileSync('./css/style.css', 'UTF-8');
 const scriptJs = fs.readFileSync('./javascripts/script.js', 'UTF-8');
 const faviconImg = fs.readFileSync('./images/favicon.png', 'UTF-8');
 
-let url2 = `https://access.line.me/oauth2/v2.1/authorize?response_type=code&client_id=1657742644&redirect_uri=https%3A%2F%2Flineapi-test.herokuapp.com%2F&state=anafaefn23&scope=profile%20openid%20email&nonce=09876xyz`;
-const callback_url = 'https://lineapi-test.herokuapp.com/';
-const response_type = 'code';
-const client_id = '1657742644';
-const redirect_uri = encodeURI(callback_url);
-const state = 'anafaefn23';
-const scope = 'profile%20openid%20email';
-const nonce = '09876xyz';
-const bot_prompt = 'aggressive';
-
 const HOST_NAME = '0.0.0.0';
 const PORT = 3000;
 
 const server = http.createServer(RouteSetting);
-
 
 async function RouteSetting(req, res) {
   const url_parts = url.parse(req.url);
