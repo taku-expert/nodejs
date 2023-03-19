@@ -12,7 +12,6 @@ body {
 }
 
 body button:nth-child(n+2) {
-
   margin-left: 50px;
 }
 
